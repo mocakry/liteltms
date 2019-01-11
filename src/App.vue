@@ -1,29 +1,34 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class="absolutely">
+    <LeftNav></LeftNav>
+      <div class="container">
+        <router-view />
+      </div>
+    <RightNav></RightNav>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+  import LeftNav from './views/common/LeftNav'
+  import RightNav from './views/common/RightNav'
+  export default {
+    name: "App",
+    components:{
+      LeftNav,
+      RightNav
     }
   }
-}
+</script>
+
+<style lang="less">
+  #app{
+    overflow: hidden;
+    .leftNav,.rightNav,.container{
+      float:left;
+    }
+    .container{
+      width:calc(100% - 169px - 135px);
+      height:100%;
+    }
+  }
 </style>

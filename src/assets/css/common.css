@@ -1,0 +1,44 @@
+*{
+  margin:0;
+  padding:0;
+}
+html,body,.absolutely{
+  width:100%;
+  height:100%;
+}
+
+.ellipsis{
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  overflow: hidden                                                                  ;
+}
+
+/*element-ui*/
+.el-submenu,.el-menu-item{
+  min-width:169px !important;
+  background:rgba(38,60,98,1);
+}
+.el-submenu .el-menu-item {
+  height:35px;
+  line-height: 35px;
+  font-size:13px;
+  padding-left:49px !important;
+}
+.noMenuNav,.el-submenu .el-submenu__title{
+  height:40px;
+  line-height: 40px;
+  font-size:14px;
+  color:rgba(223,231,238,1) !important;
+}
+.el-submenu .el-submenu__title:hover,.noMenuNav:hover,.el-menu-item:hover{
+  background-color:rgba(38,60,98,1) !important;
+}
+.el-menu-item.is-active{
+  background-color: rgba(58,146,255,0.1952) !important;
+  border-left:3px solid rgba(58,146,255,1);
+  padding-left:46px !important;
+}
+.noMenuNav.is-active{
+  padding-left:17px !important;
+}
+
