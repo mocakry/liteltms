@@ -29,6 +29,7 @@
     .container{
       width:calc(100% - 169px - 135px);
       height:100%;
+      background-color:rgba(246,247,249,1);
     }
   }
 </style>

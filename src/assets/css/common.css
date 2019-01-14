@@ -2,6 +2,7 @@
   margin:0;
   padding:0;
 }
+
 html,body,.absolutely{
   width:100%;
   height:100%;
@@ -13,32 +14,114 @@ html,body,.absolutely{
   overflow: hidden                                                                  ;
 }
 
+.left_30{
+  margin-left:30px;
+}
+
+.common_btn{
+  display: inline-block;
+  color:#fff;
+  font-size:13px;
+  background-color: #006CE7;
+  line-height: 30px;
+  padding:0 10px;
+  box-shadow:0 3px 10px 0 rgba(58,149,255,0.29);
+  border-radius:2px;
+  cursor: pointer;
+}
+
 /*element-ui*/
 .el-submenu,.el-menu-item{
   min-width:169px !important;
   background:rgba(38,60,98,1);
 }
+
 .el-submenu .el-menu-item {
   height:35px;
   line-height: 35px;
   font-size:13px;
   padding-left:49px !important;
 }
+
 .noMenuNav,.el-submenu .el-submenu__title{
   height:40px;
   line-height: 40px;
   font-size:14px;
   color:rgba(223,231,238,1) !important;
 }
+
 .el-submenu .el-submenu__title:hover,.noMenuNav:hover,.el-menu-item:hover{
   background-color:rgba(38,60,98,1) !important;
 }
+
 .el-menu-item.is-active{
   background-color: rgba(58,146,255,0.1952) !important;
   border-left:3px solid rgba(58,146,255,1);
   padding-left:46px !important;
 }
+
 .noMenuNav.is-active{
   padding-left:17px !important;
+}
+
+.title_complete_input .el-input__inner,.title_complete_select .el-input__inner{
+  border:0;
+  padding:0 20px 0 5px;
+  height:35px;
+}
+
+.search_autocomplete{
+  width:140px !important;
+  top:94px !important;
+}
+
+.search_autocomplete .el-autocomplete-suggestion__wrap{
+  padding:0;
+}
+
+.search_autocomplete li{
+  font-size:12px !important;
+  line-height: normal;
+  padding: 7px;
+  color:#333;
+}
+
+.search_autocomplete li:hover{
+  color:#006CE7;
+  font-weight:600;
+  background-color:rgba(221,235,255,1);
+}
+
+
+.title_complete_input .el-autocomplete-suggestion li{
+  padding:0 5px;
+}
+
+.title_complete_input,.title_complete_select{
+  height:100%;
+  width:140px;
+}
+
+.title_complete_input .el-input input:focus,.title_complete_select .el-input input:focus{
+  border-bottom:2px solid rgba(0,108,231,1);
+  background-color:rgba(234,243,255,1);
+  border-radius: 0;
+}
+
+.title_complete_select .el-input__suffix{
+  display: none;
+}
+
+.title_complete_select .el-input__prefix{
+  left:120px;
+}
+
+.search_select{
+  top:95px !important;
+  padding:0 !important;
+}
+
+.search_select .popper__arrow{
+  display: none;
 }
 
