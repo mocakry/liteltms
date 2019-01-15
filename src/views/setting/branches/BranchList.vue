@@ -1,6 +1,6 @@
 <template>
   <div class="branch_list">
-    <CommonTitle :name="name"></CommonTitle>
+    <CommonTitle :name="titleName"></CommonTitle>
     <div class="search_part">
       <div class="search_condition">
         <span class="keyword">网点名称：</span>
@@ -33,21 +33,82 @@
           </el-option>
         </el-select>
       </div>
-      <div class="search_btn"></div>
+      <div class="common_btn">查询</div>
     </div>
-    <div class="branch_list_container">
+    <div class="list_container">
       <div class="no_data" v-if="false">
         <img class="no_data_icon" src="../../../assets/img/no_data.png"/>
         <div class="no_data_word">还未配置网点，立即<span class="common_btn">新增网点</span></div>
       </div>
-      <div class="all_branches">
-        <div class="num_branches">已配置<span>3</span>个网点</div>
-      </div>
-      <div class="operation_btns">
-        <span class="common_btn">新建网点</span>
-      </div>
-      <div>
-      
+      <div class="all_info_list" v-if="true">
+        <div class="num_info">已配置<span>3</span>个网点</div>
+        <div class="operation_btns">
+          <span class="common_btn">新建网点</span>
+        </div>
+        <div class="branch_list_table">
+          <el-scrollbar class="scroll">
+            <div class="branch_info" v-for="(item,index) in info" :key="index" :class="index === 0 ? 'first_branch' : ''">
+              <div class="base_info">
+                <p class="ellipsis"><span class="branch_name ellipsis" v-text="item.branch"></span><span class="flag">收货</span></p>
+                <p class="ellipsis top_3"><i class="phone_icon"></i><span v-text="item.phone"></span></p>
+                <p class="ellipsis top_3"><i class="address_icon"></i><span v-text="item.address"></span></p>
+              </div>
+              <div class="area_info ellipsis">
+                <span class="tip_word ellipsis">负责区域</span>
+                <div class="direct">
+                  <p class="font_14">直达</p>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                </div>
+                <div class="transit">
+                  <p class="font_14">中转</p>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                  <div class="ellipsis">
+                    <span>上海&nbsp;(</span>
+                    <span>黄浦区、</span>
+                    <span>静安区</span>
+                    <span>)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="operation">
+                <el-switch
+                  v-model="info[index].open"
+                  active-color="#006ce7"
+                  inactive-color="#c1cad3">
+                </el-switch>
+                <div class="one_operation_btn">修改</div>
+              </div>
+            </div>
+          </el-scrollbar>
+        </div>
       </div>
     </div>
   </div>
@@ -62,9 +123,65 @@
     },
     data(){
       return {
-        name:{
-          now_page:'网点'
+        titleName:{
+          now_page:'网点',
         },
+        info:[
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:false
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:false
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:true
+          },
+          {
+            branch:'上海浦东分发中心',
+            phone:'032-222222',
+            address:'上海市浦东新区严家桥1号',
+            open:false
+          }
+        ],
         restaurants: [],
         address:'',
         allStatus: [
@@ -92,7 +209,7 @@
         let results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
         if(queryString){
           for(let i = 0 ; i < results.length ; i++){
-            results[i].value = results[i].value.replace(queryString,"<span style='color:red'>"+queryString+"</span>");
+            results[i].value = results[i].value.replace(queryString,"<span style='color:#333333'>"+queryString+"</span>");
           }
         }
         
@@ -106,6 +223,13 @@
       },
       loadAll() {
         return [
+          { "value": "三全鲜食（北新泾店）"},
+          { "value": "Hot honey 首尔炸鸡（仙霞路）"},
+          { "value": "新旺角茶餐厅"},
+          { "value": "泷千家(天山西路店)"},
+          { "value": "胖仙女纸杯蛋糕（上海凌空店）"},
+          { "value": "贡茶"},
+          { "value": "豪大大香鸡排超级奶爸"},
           { "value": "三全鲜食（北新泾店）"},
           { "value": "Hot honey 首尔炸鸡（仙霞路）"},
           { "value": "新旺角茶餐厅"},
@@ -126,61 +250,111 @@
 </script>
 
 <style scoped lang="less">
-  .branch_list{
-    height:100%;
-  }
-  .search_part {
-    height: 60px;
-    line-height: 60px;
-    box-shadow: 0 2px 10px 0 rgba(175, 192, 206, 0.24);
-    padding-left: 23px;
-    margin: 5px 23px 0 23px;
-    .search_condition{
-      height:100%;
-      .keyword{
-        font-size:13px;
-        color:rgba(102,102,102,1);
-      }
-    }
-  }
-  .branch_list_container{
-    height:calc(100% - 115px - 14px - 21px);
-    box-shadow:0 2px 10px 0 rgba(175,192,206,0.24);
-    margin:14px 23px 0;
-    padding-left:23px;
-    position: relative;
+  .list_container{
     .no_data{
-      position: absolute;
-      left:50%;
-      top:50%;
       margin-top:-140px;
-      margin-left:-82px;
-      height:100%;
       .no_data_icon {
         width: 218px;
         height: 164px;
       }
-      .no_data_word{
-        font-size:14px;
-        color:rgba(51,51,51,1);
-        .common_btn{
-          margin-left:8px;
+    }
+    .all_info_list{
+      .branch_list_table{
+        padding:0 33px 10px 20px;
+        height:calc(100% - 44px - 30px - 6px - 17px - 10px);
+        .branch_info{
+          overflow: hidden;
+          position: relative;
+          margin-top:50px;
+          &.first_branch{
+            margin-top:0;
+          }
+          .base_info{
+            width:25%;
+            color:rgba(135,143,151,1);
+            line-height:18px;
+            height:18px;
+            font-size:13px;
+            .branch_name{
+              display: inline-block;
+              font-size:16px;
+              font-weight: 600;
+              color:rgba(51,51,51,1);
+              height:22px;
+              line-height: 22px;
+              max-width:calc(100% - 45px);
+            }
+            .flag{
+              display: inline-block;
+              width:35px;
+              height:20px;
+              background:rgba(41,150,255,0.1);
+              border-radius:2px;
+              font-size:12px;
+              color:rgba(0,108,231,1);
+              line-height:20px;
+              text-align: center;
+              vertical-align: top;
+              margin-left:10px;
+            }
+          }
+          .area_info{
+            width:65%;
+            overflow: hidden;
+            font-size:13px;
+            color:#27313E;
+            line-height: 20px;
+            .tip_word{
+              width:12%;
+              height:20px;
+              line-height: 20px;
+              display: inline-block;
+              float: left;
+              font-size:14px;
+              color:rgba(135,143,151,1);
+            }
+            .direct{
+              width:50%;
+              float: left;
+            }
+            .transit{
+              width:38%;
+              float: left;
+            }
+          }
+          .operation{
+            width:10%;
+            height:100%;
+            .one_operation_btn{
+              position: absolute;
+              bottom:0;
+              right:60px;
+            }
+          }
+        }
+        .branch_info>div{
+          float: left;
         }
       }
     }
-    .all_branches{
-      .num_branches{
-        font-size:16px;
-        color:rgba(51,51,51,1);
-        height:44px;
-        line-height: 44px;
-        font-weight: 600;
-      }
-      
-    }
-    .operation_btns{
-      margin-top:6px;
-    }
+  }
+  .phone_icon{
+    display: inline-block;
+    width:8px;
+    height:11px;
+    background: url("../../../assets/img/shouji_icon.png") no-repeat;
+    background-size: cover;
+    margin-right:6px;
+    position: relative;
+    left:1px;
+  }
+  .address_icon{
+    display: inline-block;
+    width:9px;
+    height:11px;
+    background: url("../../../assets/img/address_icon.png") no-repeat;
+    background-size: cover;
+    margin-right:2px;
   }
 </style>
 
